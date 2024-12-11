@@ -2,6 +2,7 @@
   <h2>{{ recipe.name }}</h2>
   <p><strong>Ingredientes:</strong> {{ recipe.ingredients }}</p>
   <p><strong>Descripción:</strong> {{ recipe.descriptions }}</p>
+  <p><strong>Chef:</strong> {{ recipe.chef?.name || 'Sin asignar' }}</p>
   <div class="buttons">
     <button (click)="editRecipe()">Editar</button>
     <button (click)="deleteRecipe()">Borrar</button>
