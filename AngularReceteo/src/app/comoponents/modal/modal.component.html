@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{ recipe?.id ? 'Editar Receta' : 'Nueva Receta' }}</ion-title>
+    <ion-title>{{ recipe.id ? 'Editar Receta' : 'Nueva Receta' }}</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="close()">Cerrar</ion-button>
     </ion-buttons>
@@ -8,22 +8,21 @@
 </ion-header>
 
 <ion-content>
-  <form (ngSubmit)="saveRecipe()">
-    <ion-item>
-      <ion-label position="floating">Nombre</ion-label>
-      <ion-input [(ngModel)]="recipe.name" name="name" required></ion-input>
-    </ion-item>
+  <ion-item>
+    <ion-label position="floating">Nombre</ion-label>
+    <ion-input [(ngModel)]="recipe.name"></ion-input>
+  </ion-item>
 
-    <ion-item>
-      <ion-label position="floating">Ingredientes</ion-label>
-      <ion-input [(ngModel)]="recipe.ingredients" name="ingredients" required></ion-input>
-    </ion-item>
+  <ion-item>
+    <ion-label position="floating">Ingredientes</ion-label>
+    <ion-input [(ngModel)]="recipe.ingredients"></ion-input>
+  </ion-item>
 
-    <ion-item>
-      <ion-label position="floating">Descripción</ion-label>
-      <ion-textarea [(ngModel)]="recipe.description" name="description"></ion-textarea>
-    </ion-item>
+  <ion-item>
+    <ion-label position="floating">Descripción</ion-label>
+    <ion-textarea [(ngModel)]="recipe.descriptions"></ion-textarea> <!-- Cambiado a descriptions -->
+  </ion-item>
 
-    <ion-button expand="block" type="submit">Guardar</ion-button>
-  </form>
+  <ion-button expand="block" (click)="saveRecipe()">Guardar</ion-button>
 </ion-content>
+
