@@ -1,17 +1,17 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-
 import { ModalComponent } from './modal.component';
 
 @NgModule({
-  declarations: [ModalComponent], // Declara el componente del modal
-imports: [
+  declarations: [ModalComponent],
+  imports: [
     CommonModule,
-    FormsModule, // Necesario para [(ngModel)]
-    IonicModule, // Necesario para los elementos de Ionic
-],
-  exports: [ModalComponent], // Exporta el modal para usarlo en otros módulos
+    FormsModule,
+    IonicModule, // Importa los componentes de Ionic
+  ],
+  exports: [ModalComponent], // Si planeas usarlo fuera de este módulo
+  schemas: [CUSTOM_ELEMENTS_SCHEMA], // Permite el uso de elementos personalizados como ion-header
 })
 export class ModalModule {}
