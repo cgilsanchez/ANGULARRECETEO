@@ -1,0 +1,18 @@
+ion-content {
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    background-color: #f3f4f6; /* Fondo suave opcional */
+    height: 100vh; /* Altura completa de la pantalla */
+    padding: 20px; /* Espaciado interno para pantallas pequeñas */
+  }
+  
+  .form-container {
+    background: #ffffff; /* Fondo blanco */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    padding: 20px; /* Espaciado interno */
+    width: 90%; /* Ancho relativo a la pantalla */
+    max-width: 400px; /* Máximo ancho */
+  }
+  

@@ -3,34 +3,30 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
-  },
-  {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule)
   },
   {
     path: 'register',
-    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
+    loadChildren: () => import('./pages/register/register.module').then(m => m.RegisterPageModule)
   },
   {
     path: 'recetas',
-    loadChildren: () => import('./recetas/recetas.module').then( m => m.RecetasPageModule)
+    loadChildren: () => import('./pages/recetas/recetas.module').then(m => m.RecetasPageModule)
   },
   {
     path: 'chef',
-    loadChildren: () => import('./chef/chef.module').then( m => m.ChefPageModule)
+    loadChildren: () => import('./pages/chef/chef.module').then(m => m.ChefPageModule)
   },
   {
     path: 'usuario',
-    loadChildren: () => import('./usuario/usuario.module').then( m => m.UsuarioPageModule)
-  },
+    loadChildren: () => import('./pages/usuario/usuario.module').then(m => m.UsuarioPageModule)
+  }
 ];
 
 @NgModule({
@@ -40,3 +36,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
+
