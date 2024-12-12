@@ -8,17 +8,21 @@
     </ion-header>
     <ion-content>
       <ion-list>
-        <ion-item routerLink="/recetas" routerDirection="root">
+        <ion-item routerLink="/recetas" routerDirection="root" (click)="closeMenu()">
           <ion-icon slot="start" name="book-outline"></ion-icon>
           <ion-label>Recetas</ion-label>
         </ion-item>
-        <ion-item routerLink="/chefs" routerDirection="root">
+        <ion-item routerLink="/chefs" routerDirection="root" (click)="closeMenu()">
           <ion-icon slot="start" name="people-outline"></ion-icon>
           <ion-label>Chefs</ion-label>
         </ion-item>
-        <ion-item routerLink="/usuarios" routerDirection="root">
+        <ion-item routerLink="/usuarios" routerDirection="root" (click)="closeMenu()">
           <ion-icon slot="start" name="person-circle-outline"></ion-icon>
           <ion-label>Usuarios</ion-label>
+        </ion-item>
+        <ion-item (click)="logout()">
+          <ion-icon slot="start" name="log-out-outline"></ion-icon>
+          <ion-label>Cerrar sesión</ion-label>
         </ion-item>
       </ion-list>
     </ion-content>

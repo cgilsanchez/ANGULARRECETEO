@@ -41,6 +41,7 @@ export class AuthService {
 
   // Eliminar el token (logout)
   async logout() {
-    await this._storage?.remove('token');
+    await this._storage?.remove('token'); // Eliminar token del almacenamiento
   }
+  
 }
