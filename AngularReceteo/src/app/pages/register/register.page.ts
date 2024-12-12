@@ -17,18 +17,14 @@ export class RegisterPage {
     private authService: AuthService,
     private router: Router
   ) {
-    this.registerForm = this.fb.group(
-      {
-        username: ['', [Validators.required]],
-        email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required, Validators.minLength(6)]],
-        confirmPassword: ['', [Validators.required]],
-      },
-      { validators: this.passwordsMatchValidator }
-    );
+    this.registerForm = this.fb.group({
+      username: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', [Validators.required]],
+    }, { validator: this.passwordsMatchValidator });
   }
 
-  // Validar que las contraseñas coincidan
   passwordsMatchValidator(group: FormGroup) {
     const password = group.get('password')?.value;
     const confirmPassword = group.get('confirmPassword')?.value;
@@ -45,8 +41,7 @@ export class RegisterPage {
 
     this.authService.register(username, email, password).subscribe(
       () => {
-        this.errorMessage = null; // Limpiar mensaje de error en caso de éxito
-        this.router.navigate(['/login']); // Redirigir al login
+        this.router.navigate(['/login']); // Redirigir al login en caso de éxito
       },
       (error) => {
         console.error('Error al registrarse:', error);

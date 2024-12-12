@@ -7,13 +7,13 @@ import { Router, NavigationEnd } from '@angular/router';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  showMenu: boolean = true;
+  showMenu: boolean = false;
 
   constructor(private router: Router) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         const noMenuRoutes = ['/login', '/register'];
-        this.showMenu = !noMenuRoutes.includes(event.url);
+        this.showMenu = !noMenuRoutes.includes(event.url); // Mostrar el menú si no está en login o register
       }
     });
   }
