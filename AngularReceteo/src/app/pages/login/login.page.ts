@@ -23,7 +23,7 @@ export class LoginPage {
     });
   }
 
-  async onSubmit() {
+  async onSubmit(): Promise<void> {
     if (this.loginForm.invalid) {
       this.errorMessage = 'Por favor, revisa los campos.';
       return;
@@ -34,9 +34,11 @@ export class LoginPage {
     this.authService.login(identifier, password).subscribe(
       async (response) => {
         await this.authService.setToken(response.jwt);
+        this.errorMessage = null; // Limpiar mensaje de error en caso de éxito
         this.router.navigate(['/recetas']); // Redirigir al listado de recetas
       },
-      () => {
+      (error) => {
+        console.error('Error al iniciar sesión:', error);
         this.errorMessage = 'Credenciales incorrectas. Intenta nuevamente.';
       }
     );

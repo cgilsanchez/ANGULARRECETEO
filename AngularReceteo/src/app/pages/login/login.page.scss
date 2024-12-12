@@ -1,18 +1,80 @@
-ion-content {
-    display: flex;
-    justify-content: center; /* Centrar horizontalmente */
-    align-items: center; /* Centrar verticalmente */
-    background-color: #f3f4f6; /* Fondo suave opcional */
-    height: 100vh; /* Altura completa de la pantalla */
-    padding: 20px; /* Espaciado interno para pantallas pequeñas */
-  }
-  
-  .form-container {
-    background: #ffffff; /* Fondo blanco */
-    border-radius: 10px; /* Bordes redondeados */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    padding: 20px; /* Espaciado interno */
-    width: 90%; /* Ancho relativo a la pantalla */
-    max-width: 400px; /* Máximo ancho */
-  }
-  
+/* Fondo global */
+body, ion-app, ion-content {
+  background-color: #ffe6cc; /* Naranja clarito */
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Centrar contenido */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Diseño de la tarjeta */
+.auth-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+/* Estilo del logo */
+.auth-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.auth-logo img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #ff9800; /* Borde naranja */
+}
+
+/* Títulos */
+.auth-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Botones */
+button {
+  background-color: #ff9800; /* Botones naranja */
+  color: white;
+  font-size: 16px;
+  border: none;
+  padding: 10px 15px;
+  width: 100%;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+button:hover {
+  background-color: #e88e00;
+}
+
+/* Links */
+a {
+  color: #ff9800;
+  text-decoration: none;
+  font-size: 14px;
+  margin-top: 10px;
+  display: inline-block;
+}
+
+/* Campos del formulario */
+ion-item {
+  margin: 10px 0;
+}

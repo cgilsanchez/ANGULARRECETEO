@@ -13,27 +13,27 @@ const routes: Routes = [
       import('./pages/register/register.module').then((m) => m.RegisterPageModule),
   },
   {
-    path: 'recetas', // Ruta para la página de recetas
+    path: 'recetas',
     loadChildren: () =>
       import('./pages/recetas/recetas.module').then((m) => m.RecetasPageModule),
   },
   {
-    path: 'chefs', // Ruta para la página de chefs
+    path: 'chefs',
     loadChildren: () =>
       import('./pages/chef/chef.module').then((m) => m.ChefPageModule),
   },
   {
-    path: 'usuarios', // Ruta para la página de usuarios
+    path: 'usuarios',
     loadChildren: () =>
       import('./pages/usuario/usuario.module').then((m) => m.UsuarioPageModule),
   },
   {
-    path: '', // Redirigir al login como página inicial
+    path: '',
     redirectTo: 'login',
     pathMatch: 'full',
   },
   {
-    path: '**', // Ruta por defecto si no encuentra la página
+    path: '**',
     redirectTo: 'login',
   },
 ];

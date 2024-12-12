@@ -1,54 +1,44 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Registro</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-  <div class="form-container">
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-logo">
+      <img src="assets/recipe-logo.webp" alt="Receteo Logo" />
+    </div>
+    <h1 class="auth-title">Crear Cuenta</h1>
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <ion-item>
         <ion-label position="floating">Nombre de Usuario</ion-label>
         <ion-input type="text" formControlName="username"></ion-input>
       </ion-item>
-      <ion-text color="danger" *ngIf="registerForm.get('username')?.invalid && registerForm.get('username')?.touched">
-        El nombre de usuario es obligatorio.
-      </ion-text>
+      <div *ngIf="registerForm.get('username')?.invalid && registerForm.get('username')?.touched">
+        <p style="color: red;">Nombre requerido</p>
+      </div>
 
       <ion-item>
         <ion-label position="floating">Correo Electrónico</ion-label>
         <ion-input type="email" formControlName="email"></ion-input>
       </ion-item>
-      <ion-text color="danger" *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
-        Introduce un correo válido.
-      </ion-text>
+      <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+        <p style="color: red;">Correo válido requerido</p>
+      </div>
 
       <ion-item>
         <ion-label position="floating">Contraseña</ion-label>
         <ion-input type="password" formControlName="password"></ion-input>
       </ion-item>
-      <ion-text color="danger" *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
-        La contraseña debe tener al menos 6 caracteres.
-      </ion-text>
+      <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+        <p style="color: red;">Contraseña debe tener al menos 6 caracteres</p>
+      </div>
 
       <ion-item>
         <ion-label position="floating">Confirmar Contraseña</ion-label>
         <ion-input type="password" formControlName="confirmPassword"></ion-input>
       </ion-item>
-      <ion-text color="danger" *ngIf="registerForm.errors?.['passwordsMismatch']">
-        Las contraseñas no coinciden.
-      </ion-text>
+      <div *ngIf="registerForm.errors?.['passwordsMismatch']">
+        <p style="color: red;">Las contraseñas no coinciden</p>
+      </div>
 
-      <ion-button expand="block" type="submit" [disabled]="registerForm.invalid">Registrarse</ion-button>
+      <button type="submit">Crear Cuenta</button>
     </form>
-
-    <ion-text color="danger" *ngIf="errorMessage">{{ errorMessage }}</ion-text>
-
-    <div class="ion-text-center">
-      <ion-button fill="clear" routerLink="/login">
-        ¿Ya tienes cuenta? Inicia Sesión
-      </ion-button>
-    </div>
+    <a routerLink="/login">¿Ya tienes cuenta? Inicia Sesión</a>
   </div>
-</ion-content>
-
+</div>
