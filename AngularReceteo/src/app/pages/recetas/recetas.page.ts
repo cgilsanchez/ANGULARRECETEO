@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { RecipesService } from '../../service/recipes.service';
-import { ModalComponent } from '../../comoponents/modal/modal.component';
+import { ChefModalComponent } from '../../comoponents/chef-modal/chef-modal.component';
+import { ChefService } from '../../service/chefs.service';
 
 @Component({
   selector: 'app-recetas',
@@ -9,53 +9,37 @@ import { ModalComponent } from '../../comoponents/modal/modal.component';
   styleUrls: ['./recetas.page.scss'],
 })
 export class RecetasPage {
-  recipes: any[] = [];
+  chefs: any[] = [];
 
   constructor(
-    private recipesService: RecipesService,
-    private modalCtrl: ModalController
-  ) {}
-
-  ionViewWillEnter() {
-    this.loadRecipes();
+    private modalCtrl: ModalController,
+    private chefService: ChefService
+  ) {
+    this.loadChefs();
   }
 
-  loadRecipes() {
-    this.recipesService.getRecipes().subscribe({
-      next: (res) => {
-        this.recipes = res.data.map((item: any) => ({
-          id: item.id,
-          ...item.attributes,
-        }));
+  async loadChefs() {
+    this.chefService.getChefs().subscribe(
+      (response: any) => {
+        this.chefs = response.data || []; // Asegúrate de que `data` existe
       },
-      error: (err) => console.error('Error al cargar recetas:', err),
-    });
+      (error: any) => {
+        console.error('Error al cargar chefs:', error);
+      }
+    );
   }
 
-  async openModal(recipe: any = null) {
+  async openChefModal() {
     const modal = await this.modalCtrl.create({
-      component: ModalComponent,
-      componentProps: {
-        recipe: recipe ? { ...recipe } : { name: '', ingredients: '', descriptions: '' },
-      },
+      component: ChefModalComponent,
     });
 
     modal.onDidDismiss().then((result) => {
       if (result.data) {
-        this.loadRecipes();
+        this.chefs.push(result.data); // Agregar el chef creado a la lista
       }
     });
 
-    return await modal.present();
-  }
-
-  deleteRecipe(id: number) {
-    this.recipesService.deleteRecipe(id).subscribe({
-      next: () => {
-        console.log('Receta eliminada con éxito');
-        this.loadRecipes();
-      },
-      error: (err) => console.error('Error al eliminar receta:', err),
-    });
+    await modal.present();
   }
 }

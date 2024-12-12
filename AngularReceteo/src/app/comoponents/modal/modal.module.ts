@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms'; // Importar ReactiveFormsModule
 import { IonicModule } from '@ionic/angular';
 import { ModalComponent } from './modal.component';
 
 @NgModule({
-  declarations: [ModalComponent], // Declara el componente del modal
+  declarations: [ModalComponent],
   imports: [
     CommonModule,
-    FormsModule,
-    IonicModule, // Asegúrate de importar IonicModule
+    ReactiveFormsModule, // Importar aquí
+    IonicModule,
   ],
-  exports: [ModalComponent], // Exporta el componente para que otros módulos puedan usarlo
+  exports: [ModalComponent],
 })
 export class ModalModule {}

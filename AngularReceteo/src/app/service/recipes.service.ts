@@ -3,39 +3,26 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RecipesService {
-  private apiUrl = 'http://localhost:1337/api/recetas'; // Endpoint de Strapi
+  private apiUrl = 'http://localhost:1337/recipes'; // URL de tu API
 
   constructor(private http: HttpClient) {}
 
-  // Obtener todas las recetas
-  getRecipes(): Observable<any> {
-    return this.http.get<any>(this.apiUrl);
+  getRecipes(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl);
   }
 
-  // Crear o actualizar una receta
-  saveRecipe(recipe: any): Observable<any> {
-    const payload = {
-      data: {
-        name: recipe.name,
-        ingredients: recipe.ingredients,
-        descriptions: recipe.descriptions // Cambiado a descriptions
-      }
-    };
-
-    if (recipe.id) {
-      // Actualizar receta existente
-      return this.http.put(`${this.apiUrl}/${recipe.id}`, payload);
-    } else {
-      // Crear nueva receta
-      return this.http.post(this.apiUrl, payload);
-    }
+  createRecipe(recipe: any): Observable<any> {
+    return this.http.post<any>(this.apiUrl, recipe);
   }
 
-  // Eliminar una receta
-  deleteRecipe(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+  updateRecipe(id: number, recipe: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${id}`, recipe);
+  }
+
+  deleteRecipe(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }

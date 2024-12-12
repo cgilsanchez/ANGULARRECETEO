@@ -1,14 +1,20 @@
-<div class="container">
-  <h1>Chefs</h1>
-  <button class="add-button" (click)="openModal()">Agregar Chef</button>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Agregar Chef</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 
-  <div class="chef-grid">
-    <div class="chef-card" *ngFor="let chef of chefs">
-      <h2>{{ chef.name }}</h2>
-      <div class="buttons">
-        <button (click)="editChef(chef)">Editar</button>
-        <button (click)="deleteChef(chef.id)">Borrar</button>
-      </div>
-    </div>
-  </div>
-</div>
+<ion-content>
+  <form [formGroup]="chefForm" (ngSubmit)="saveChef()">
+    <ion-item>
+      <ion-label position="floating">Nombre del Chef</ion-label>
+      <ion-input formControlName="name"></ion-input>
+    </ion-item>
+    <ion-button expand="block" type="submit" [disabled]="chefForm.invalid">
+      Guardar
+    </ion-button>
+  </form>
+</ion-content>

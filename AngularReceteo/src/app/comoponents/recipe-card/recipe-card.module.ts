@@ -1,12 +1,15 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
-
+import { IonicModule } from '@ionic/angular'; // Importación de IonicModule
 import { RecipeCardComponent } from './recipe-card.component';
 
 @NgModule({
-  declarations: [RecipeCardComponent], // Declara el componente
-  imports: [CommonModule, IonicModule], // Importa los módulos necesarios
-  exports: [RecipeCardComponent], // Exporta el componente para que otros módulos puedan usarlo
+  declarations: [RecipeCardComponent],
+  imports: [
+    CommonModule,
+    IonicModule, // Asegúrate de que está incluido aquí
+  ],
+  exports: [RecipeCardComponent], // Exportar el componente si se usa en otros módulos
+  schemas: [CUSTOM_ELEMENTS_SCHEMA], // Permitir el uso de componentes personalizados como ion-card-footer
 })
 export class RecipeCardModule {}

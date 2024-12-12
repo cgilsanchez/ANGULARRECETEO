@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
-import { ChefService, Chef } from '../../service/chefs.service';
+import { RecipesService } from '../../service/recipes.service';
+import { ChefService } from '../../service/chefs.service';
 
 @Component({
   selector: 'app-modal',
@@ -8,33 +10,50 @@ import { ChefService, Chef } from '../../service/chefs.service';
   styleUrls: ['./modal.component.scss'],
 })
 export class ModalComponent implements OnInit {
-  @Input() recipe: any = {
-    name: '',
-    ingredients: '',
-    description: '',
-    chef: null, // ID del chef asignado
-  };
-  chefs: Chef[] = []; // Lista de chefs disponibles
+  @Input() recipe: any = null; // Receta actual para editar o nula para nueva
+  recipeForm: FormGroup;
+  chefs: any[] = [];
 
   constructor(
     private modalController: ModalController,
+    private fb: FormBuilder,
+    private recipesService: RecipesService,
     private chefService: ChefService
-  ) {}
-
-  ngOnInit() {
-    // Cargar la lista de chefs al abrir el modal
-    this.chefService.getChefs().subscribe((data) => {
-      this.chefs = data;
+  ) {
+    this.recipeForm = this.fb.group({
+      title: ['', Validators.required],
+      ingredients: ['', Validators.required],
+      description: ['', Validators.required],
+      chef: [null, Validators.required],
     });
   }
 
+  async ngOnInit() {
+    const chefs = await this.chefService.getChefs().toPromise();
+    this.chefs = chefs || []; // Asegurarse de que chefs no sea undefined
+    if (this.recipe) {
+      this.recipeForm.patchValue(this.recipe);
+    }
+  }
+  
   close() {
     this.modalController.dismiss();
   }
 
   saveRecipe() {
-    // Aquí envías los datos de la receta, incluyendo el chef seleccionado
-    console.log(this.recipe);
-    this.modalController.dismiss(this.recipe);
+    if (this.recipeForm.invalid) {
+      return;
+    }
+
+    const recipeData = this.recipeForm.value;
+    if (this.recipe) {
+      this.recipesService.updateRecipe(this.recipe.id, recipeData).subscribe(() => {
+        this.modalController.dismiss(recipeData);
+      });
+    } else {
+      this.recipesService.createRecipe(recipeData).subscribe((newRecipe) => {
+        this.modalController.dismiss(newRecipe);
+      });
+    }
   }
 }

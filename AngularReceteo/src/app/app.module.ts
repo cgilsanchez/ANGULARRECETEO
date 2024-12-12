@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage-angular';
-import { ModalModule } from './comoponents/modal/modal.module'; // Asegúrate de que la ruta sea correcta
+import { ChefModalModule } from './comoponents/chef-modal/chef-modal.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,7 +16,7 @@ import { ModalModule } from './comoponents/modal/modal.module'; // Asegúrate de
     AppRoutingModule,
     HttpClientModule,
     IonicStorageModule.forRoot(),
-    ModalModule, // Agrega el módulo del modal
+    ChefModalModule,
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

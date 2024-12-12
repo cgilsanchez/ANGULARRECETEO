@@ -1,54 +1,45 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ChefService } from '../../service/chefs.service';
 
 @Component({
-  selector: 'app-chefs',
-  templateUrl: './chefs.component.html',
-  styleUrls: ['./chefs.component.scss'],
+  selector: 'app-chef-modal',
+  templateUrl: './chef-modal.component.html',
+  styleUrls: ['./chef-modal.component.scss'],
 })
-export class ChefsComponent implements OnInit {
-  chefs: any[] = [];
-  apiUrl = 'http://localhost:1337/chefs'; // URL de tu endpoint en Strapi
+export class ChefModalComponent {
+  chefForm: FormGroup;
 
-  constructor(private http: HttpClient) {}
-
-  ngOnInit() {
-    this.getChefs();
-  }
-
-  getChefs() {
-    this.http.get<any[]>(this.apiUrl).subscribe((data) => {
-      this.chefs = data;
+  constructor(
+    private modalController: ModalController,
+    private fb: FormBuilder,
+    private chefService: ChefService
+  ) {
+    this.chefForm = this.fb.group({
+      name: ['', [Validators.required]],
     });
   }
 
-  openModal(chef: any | null = null) {
-    const name = prompt(chef ? 'Editar nombre del chef:' : 'Agregar nombre del chef:', chef?.name || '');
-    if (name) {
-      chef ? this.updateChef(chef.id, name) : this.createChef(name);
+  async saveChef() {
+    if (this.chefForm.invalid) {
+      return;
     }
+
+    const { name } = this.chefForm.value;
+
+    this.chefService.addChef({ name }).subscribe(
+      async (response) => {
+        console.log('Chef creado:', response);
+        await this.closeModal();
+      },
+      (error) => {
+        console.error('Error al crear chef:', error);
+      }
+    );
   }
 
-  createChef(name: string) {
-    this.http.post(this.apiUrl, { name }).subscribe(() => {
-      alert('Chef creado');
-      this.getChefs();
-    });
-  }
-
-  updateChef(id: number, name: string) {
-    this.http.put(`${this.apiUrl}/${id}`, { name }).subscribe(() => {
-      alert('Chef actualizado');
-      this.getChefs();
-    });
-  }
-
-  deleteChef(id: number) {
-    if (confirm('¿Estás seguro de que deseas eliminar este chef?')) {
-      this.http.delete(`${this.apiUrl}/${id}`).subscribe(() => {
-        alert('Chef eliminado');
-        this.getChefs();
-      });
-    }
+  async closeModal() {
+    await this.modalController.dismiss();
   }
 }

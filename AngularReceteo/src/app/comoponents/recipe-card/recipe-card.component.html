@@ -1,12 +1,17 @@
-<div class="recipe-grid">
-  <div class="recipe-card">
-    <h2>Tortilla</h2>
-    <p><strong>Ingredientes:</strong> papa</p>
-    <p><strong>Descripción:</strong> hacer las papas</p>
-    <p><strong>Chef:</strong> Sin asignar</p>
-    <div class="buttons">
-      <button (click)="editRecipe()">Editar</button>
-      <button (click)="deleteRecipe()">Borrar</button>
-    </div>
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>{{ recipe.title }}</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <p><strong>Ingredientes:</strong> {{ recipe.ingredients }}</p>
+    <p><strong>Descripción:</strong> {{ recipe.description }}</p>
+    <p><strong>Chef:</strong> {{ recipe.chef.name }}</p>
+  </ion-card-content>
+
+  <!-- Reemplazo de ion-card-footer por un div -->
+  <div class="card-footer">
+    <ion-button fill="outline" color="primary" (click)="editRecipe()">Editar</ion-button>
+    <ion-button fill="outline" color="danger" (click)="deleteRecipe()">Borrar</ion-button>
   </div>
-</div>
+</ion-card>

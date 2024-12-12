@@ -5,18 +5,11 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <app-recipe-card
-      *ngFor="let recipe of recipes"
-      [recipe]="recipe"
-      (edit)="openModal(recipe)"
-      (delete)="deleteRecipe(recipe.id)"
-    ></app-recipe-card>
-  </ion-list>
+  <ion-button expand="block" (click)="openChefModal()">Agregar Chef</ion-button>
 
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="openModal()">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+  <ion-list>
+    <ion-item *ngFor="let chef of chefs">
+      {{ chef.attributes.name }}
+    </ion-item>
+  </ion-list>
 </ion-content>
